@@ -1,17 +1,28 @@
-def main():
-	from langchain_community.llms import HuggingFaceEndpoint
-	from langchain_core.prompts import ChatPromptTemplate
-	import streamlit as st
+from langchain_community.llms import HuggingFaceEndpoint
+from langchain_core.prompts import ChatPromptTemplate
+from langchain.text_splitter  import CharacterTextSplitter
+import streamlit as st
+from langchain_community.document_loaders import PyPDFLoader
 
-	from langchain_community.document_loaders import PyPDFLoader
+def main():
 
 	loader = PyPDFLoader("data/data.pdf")
-	pages = loader.load_and_split()
+	documents = loader.load()
 
 	st.title("Pakistan Constitution RAG")
 	st.subheader("Ask me questions about Pakistan Constitution.")
 
-	st.write(pages)
+	text_splitter = CharacterTextSplitter(
+		separator="\n",
+		chunk_size=1000,
+		chunk_overlap=200,
+		length_function=len
+	)
+
+	texts = text_splitter.split_documents(documents)
+
+	st.write(texts)
+
 
 
 
