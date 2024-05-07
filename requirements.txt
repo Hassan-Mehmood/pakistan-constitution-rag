@@ -4,4 +4,5 @@ python-dotenv
 pypdf2
 encryption
 cryptography
-PyCryptodome 
+PyCryptodome
+sentence_transformers

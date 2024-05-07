@@ -1,17 +1,15 @@
-from langchain_community.llms import HuggingFaceEndpoint
-from langchain_core.prompts import ChatPromptTemplate
-from langchain.text_splitter  import CharacterTextSplitter
 import streamlit as st
+from langchain.text_splitter  import CharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader
+from langchain_community.embeddings import HuggingFaceInstructEmbeddings
 
 def main():
-
-	loader = PyPDFLoader("data/data.pdf")
-	documents = loader.load()
-
 	st.title("Pakistan Constitution RAG")
 	st.subheader("Ask me questions about Pakistan Constitution.")
 
+	loader = PyPDFLoader("data/data.pdf")
+	documents = loader.load()
+	
 	text_splitter = CharacterTextSplitter(
 		separator="\n",
 		chunk_size=1000,
@@ -23,25 +21,5 @@ def main():
 
 	st.write(texts)
 
-
-
-
-	# repo_id = "mistralai/Mixtral-8x7B-Instruct-v0.1"
-
-	# prompt = ChatPromptTemplate.from_messages([
-	# 	("system", "You are an assistant that will answer questions provided by the user."),
-	# 	])
-
-	# llm = HuggingFaceEndpoint(
-	# 	repo_id=repo_id, temperature=0.5
-	# 	)
-	
-	# chain = prompt | llm
-
-	# print(chain.invoke({
-	# 	"dish": "chicken curry",
-	# }))
-
-	
 if __name__ == '__main__':
 	main()
