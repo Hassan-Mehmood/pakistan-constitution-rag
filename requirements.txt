@@ -1,8 +1,7 @@
 streamlit
 langchain
 python-dotenv
-pypdf2
-encryption
+pypdf
 cryptography
-PyCryptodome
-sentence_transformers
+sentence-transformers==2.2.2
+InstructorEmbedding
